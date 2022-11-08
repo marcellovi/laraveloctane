@@ -55,6 +55,23 @@ class AuthController extends Controller
         }
     }
 
+    public function noAuthMessage()
+    {
+        return response()->json([
+                'status' => true,
+                'message' => 'This message can only be seen with an Api Token.'               
+            ], 200);
+    }
+
+    public function logoutUser(Request $request)
+    {
+        auth()->user()->tokens()->delete();
+        return response()->json([
+                'status' => true,
+                'message' => 'User logged out.'               
+            ], 200);
+    }
+
     /**
      * Login The User
      * @param Request $request
